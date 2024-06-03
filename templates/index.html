@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat and Dog Classification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4a90e2;
+            margin: 20px 0;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 300px;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 10px 0;
+            font-size: 1em;
+        }
+
+        input[type="submit"], button {
+            background-color: #4a90e2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        input[type="submit"]:hover, button:hover {
+            background-color: #357abd;
+            transform: scale(1.05);
+        }
+
+        .samples {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .samples form {
+            margin: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        #image-preview {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Cat and Dog Classification</h1>
+
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <input type="submit" value="Upload">
+    </form>
+
+    <h2>Or use a sample image</h2>
+    <div class="samples">
+        {% for sample in samples %}
+            <form action="/predict_sample" method="post" style="display: inline;">
+                <button type="submit" name="sample" value="{{ sample }}">{{ sample }}</button>
+            </form>
+        {% endfor %}
+    </div>
+
+    <div id="result">
+        {% if result %}
+            <p>{{ result }}</p>
+        {% endif %}
+
+        {% if uploaded_image or sample_image %}
+            <img id="image-preview" src="{{ uploaded_image or sample_image }}" alt="Image Preview">
+        {% endif %}
+    </div>
+</body>
+</html>
