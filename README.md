@@ -7,8 +7,8 @@ This project allows you to classify images as either cats or dogs using a pre-tr
 ### Clone the repository
 
 ```bash
-git clone https://github.com/wterrr/DCC.git
-cd DCC
+git clone https://github.com/wterrr/Dog_Cat_Classification.git
+cd Dog_Cat_Classification
 ```
 
 ### Install virtualenv if you haven't already
